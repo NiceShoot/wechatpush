@@ -1,4 +1,4 @@
-package cn.cvzhanshi.wechatpush.config;
+package cn.xibei.wechat.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -6,15 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * @author cVzhanshi
+ * @author jiabing
  * @create 2022-08-04 22:58
  */
 public class JiNianRiUtils {
 
     public static int getLianAi(){
-        return calculationLianAi("2021-11-06");
+        return calculationLianAi("2022-01-17");
     }
-    public static int getBirthday_Jo(){
+    public static int getBirthday_xueyan(){
         try {
             return calculationBirthday("2001-11-16");
         } catch (ParseException e) {
@@ -22,14 +22,7 @@ public class JiNianRiUtils {
         }
         return 0;
     }
-    public static int getBirthday_Hui(){
-        try {
-            return calculationBirthday("2000-09-11");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+
 
 
     public static int calculationBirthday(String clidate) throws ParseException {
@@ -66,4 +59,5 @@ public class JiNianRiUtils {
         }
         return day;
     }
+
 }

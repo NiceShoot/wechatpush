@@ -1,7 +1,11 @@
-package cn.cvzhanshi.wechatpush.config;
+package cn.xibei.wechat.manager;
 
 
-import cn.cvzhanshi.wechatpush.entity.Weather;
+import cn.xibei.wechat.config.constants.CommonConstant;
+import cn.xibei.wechat.dto.res.ResWeather;
+import cn.xibei.wechat.utils.CaiHongPiUtils;
+import cn.xibei.wechat.utils.JiNianRiUtils;
+import cn.xibei.wechat.utils.WeatherUtils;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
@@ -11,7 +15,7 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import java.util.Map;
 
 /**
- * @author cVzhanshi
+ * @author jiabing
  * @create 2022-08-04 21:09
  */
 public class Pusher {
@@ -19,25 +23,22 @@ public class Pusher {
     public static void main(String[] args) {
         push();
     }
-    private static String appId = "xx";
-    private static String secret = "xx";
-
-
 
     public static void push(){
         //1，配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
-        wxStorage.setAppId(appId);
-        wxStorage.setSecret(secret);
+        wxStorage.setAppId(CommonConstant.APPID_TEST);
+        wxStorage.setSecret(CommonConstant.SECRET_TEST);
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(wxStorage);
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("xx")
-                .templateId("xx")
+                .toUser("oqFra6ZIV5nsNxLbb3yDp1idu1Fg")// 贾冰
+                //.toUser("oqFra6TIEjhgDa65lENKckMPXj3o")// 雪燕
+                .templateId("S1kPMXlTnwb2PAS8xNq2Dsw1k7fMhynlTXipcaaoycU")
                 .build();
         //3,如果是正式版发送模版消息，这里需要配置你的信息
-        Weather weather = WeatherUtils.getWeather();
+        ResWeather weather = WeatherUtils.getWeather();
         Map<String, String> map = CaiHongPiUtils.getEnsentence();
         templateMessage.addData(new WxMpTemplateData("riqi",weather.getDate() + "  "+ weather.getWeek(),"#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00FFFF"));
@@ -47,22 +48,14 @@ public class Pusher {
         templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#42B857" ));
         templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#B95EA3" ));
         templateMessage.addData(new WxMpTemplateData("caihongpi",CaiHongPiUtils.getCaiHongPi(),"#FF69B4"));
-        templateMessage.addData(new WxMpTemplateData("lianai",JiNianRiUtils.getLianAi()+"","#FF1493"));
-        templateMessage.addData(new WxMpTemplateData("shengri1",JiNianRiUtils.getBirthday_Jo()+"","#FFA500"));
-        templateMessage.addData(new WxMpTemplateData("shengri2",JiNianRiUtils.getBirthday_Hui()+"","#FFA500"));
+        templateMessage.addData(new WxMpTemplateData("lianai", JiNianRiUtils.getLianAi()+"","#FF1493"));
         templateMessage.addData(new WxMpTemplateData("en",map.get("en") +"","#C71585"));
         templateMessage.addData(new WxMpTemplateData("zh",map.get("zh") +"","#C71585"));
-        String beizhu = "啾啾❤灰灰";
+        String beizhu = "—— 西贝冰";
         if(JiNianRiUtils.getLianAi() % 365 == 0){
             beizhu = "今天是恋爱" + (JiNianRiUtils.getLianAi() / 365) + "周年纪念日！";
         }
-        if(JiNianRiUtils.getBirthday_Jo()  == 0){
-            beizhu = "今天是臭啾啾生日，生日快乐呀！";
-        }
-        if(JiNianRiUtils.getBirthday_Hui()  == 0){
-            beizhu = "今天是臭灰灰生日，生日快乐呀！";
-        }
-        templateMessage.addData(new WxMpTemplateData("beizhu",beizhu,"#FF0000"));
+        templateMessage.addData(new WxMpTemplateData("beizhu",beizhu,"#FF69B4"));
 
         try {
             System.out.println(templateMessage.toJson());

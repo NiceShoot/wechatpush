@@ -1,17 +1,17 @@
-package cn.cvzhanshi.wechatpush.entity;
+package cn.xibei.wechat.dto.res;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author cVzhanshi
+ * @author jiabing
  * @create 2022-08-04 2215
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Weather {
+public class ResWeather {
     String wd_night;
     String date;
     String high;

@@ -53,6 +53,14 @@
             <artifactId>weixin-java-mp</artifactId>
             <version>3.3.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.dozermapper</groupId>
+            <artifactId>dozer-core</artifactId>
+            <version>6.5.0</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -87,7 +95,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>cn.cvzhanshi.wechatpush.WechatpushApplication</mainClass>
+                    <mainClass>cn.xibei.wechat.WechatpushApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
