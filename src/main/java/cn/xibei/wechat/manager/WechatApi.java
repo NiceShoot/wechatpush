@@ -7,6 +7,7 @@ import cn.xibei.wechat.dto.req.ReqAccessToken;
 import cn.xibei.wechat.dto.req.ReqReplayMsg;
 import cn.xibei.wechat.dto.res.ResAccessToken;
 import cn.xibei.wechat.dto.res.ResBase;
+import cn.xibei.wechat.utils.CaiHongPiUtils;
 import cn.xibei.wechat.utils.ConvertUtil;
 import cn.xibei.wechat.utils.RestTemplateUtil;
 import com.alibaba.fastjson.JSON;
@@ -33,33 +34,24 @@ public class WechatApi {
         return accessToken;
     }
 
-    /**
-     *
-     */
     public static String handle(ResBase resBase) {
         String msgType = resBase.getMsgType();
 
         if (msgType.equals(MsgTypeEnum.TEXT.getType())) {
-            ReqReplayMsg reqReplayMsg = new ReqReplayMsg();
-            reqReplayMsg.setMsgType("text");
-            reqReplayMsg.setCreateTime(new Date().getTime());
-            reqReplayMsg.setFromUserName(resBase.getToUserName());
-            reqReplayMsg.setToUserName(resBase.getFromUserName());
-            reqReplayMsg.setContent("今天是：{{riqi.DATA}} \n" +
-                    "天气：{{tianqi.DATA}} \n" +
-                    "温度：{{temp.DATA}} \n" +
-                    "最低温度：{{low.DATA}} \n" +
-                    "最高温度：{{high.DATA}} \n" +
-                    "风向：{{winddir.DATA}} \n" +
-                    "风级：{{windclass.DATA}} \n" +
-                    "今天是我们恋爱的第{{lianai.DATA}}天\n" +
-                    "你知道吗，{{caihongpi.DATA}} {{beizhu.DATA}} \n" +
-                    "\n" +
-                    "{{zh.DATA}}\n" +
-                    "{{en.DATA}} ");
-            return getXmlString(reqReplayMsg);
+            return textReplay(resBase);
         }
         return "";
+    }
+
+    private static String textReplay(ResBase resBase) {
+        ReqReplayMsg reqReplayMsg = new ReqReplayMsg();
+        reqReplayMsg.setMsgType("text");
+        reqReplayMsg.setCreateTime(new Date().getTime());
+        reqReplayMsg.setFromUserName(resBase.getToUserName());
+        reqReplayMsg.setToUserName(resBase.getFromUserName());
+        reqReplayMsg.setContent(CaiHongPiUtils.getCaiHongPi());
+        String xmlString = getXmlString(reqReplayMsg);
+        return xmlString;
     }
 
 

@@ -40,13 +40,25 @@ public class Pusher {
         //3,如果是正式版发送模版消息，这里需要配置你的信息
         ResWeather weather = WeatherUtils.getWeather();
         Map<String, String> map = CaiHongPiUtils.getEnsentence();
+//        templateMessage.addData(new WxMpTemplateData("riqi",weather.getDate() + "  "+ weather.getWeek(),"#00BFFF"));
+//        templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00FFFF"));
+//        templateMessage.addData(new WxMpTemplateData("low",weather.getLow() + "","#173177"));
+//        templateMessage.addData(new WxMpTemplateData("temp",weather.getTemp() + "","#EE212D"));
+//        templateMessage.addData(new WxMpTemplateData("high",weather.getHigh()+ "","#FF6347" ));
+//        templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#42B857" ));
+//        templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#B95EA3" ));
+//        templateMessage.addData(new WxMpTemplateData("caihongpi",CaiHongPiUtils.getCaiHongPi(),"#FF69B4"));
+//        templateMessage.addData(new WxMpTemplateData("lianai", JiNianRiUtils.getLianAi()+"","#FF1493"));
+//        templateMessage.addData(new WxMpTemplateData("en",map.get("en") +"","#C71585"));
+//        templateMessage.addData(new WxMpTemplateData("zh",map.get("zh") +"","#C71585"));
+
         templateMessage.addData(new WxMpTemplateData("riqi",weather.getDate() + "  "+ weather.getWeek(),"#00BFFF"));
-        templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00FFFF"));
-        templateMessage.addData(new WxMpTemplateData("low",weather.getLow() + "","#173177"));
+        templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00BFFF"));
+        templateMessage.addData(new WxMpTemplateData("low",weather.getLow() + "","#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("temp",weather.getTemp() + "","#EE212D"));
-        templateMessage.addData(new WxMpTemplateData("high",weather.getHigh()+ "","#FF6347" ));
-        templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#42B857" ));
-        templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#B95EA3" ));
+        templateMessage.addData(new WxMpTemplateData("high",weather.getHigh()+ "","#00BFFF" ));
+        templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#00BFFF" ));
+        templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#00BFFF" ));
         templateMessage.addData(new WxMpTemplateData("caihongpi",CaiHongPiUtils.getCaiHongPi(),"#FF69B4"));
         templateMessage.addData(new WxMpTemplateData("lianai", JiNianRiUtils.getLianAi()+"","#FF1493"));
         templateMessage.addData(new WxMpTemplateData("en",map.get("en") +"","#C71585"));

@@ -17,4 +17,10 @@ public class TestController {
         return JSON.toJSONString(accessToken);
     }
 
+
+    @RequestMapping("/hello")
+    public String hello(){
+        return "hello world";
+    }
+
 }

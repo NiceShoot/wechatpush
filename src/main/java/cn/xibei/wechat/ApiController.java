@@ -1,36 +1,39 @@
 package cn.xibei.wechat;
 
-import cn.xibei.wechat.config.constants.MsgTypeEnum;
 import cn.xibei.wechat.dto.res.ResBase;
+import cn.xibei.wechat.manager.Pusher;
 import cn.xibei.wechat.manager.WechatApi;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.xibei.wechat.utils.EncUtils;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/jiabing")
+@Slf4j
 public class ApiController {
 
 
+    @PostMapping(value = "/push")
+    public String push(){
+        Pusher.push();
+        return "success";
+    }
 
-    @PostMapping(value = "/api",consumes = "application/xml",produces = "application/xml; charset=UTF-8")
+    @PostMapping(value = "/api",consumes = "text/xml",produces = "text/xml; charset=UTF-8")
     public String api(@RequestBody ResBase resBase){
+        log.info("入参："+ JSON.toJSONString(resBase));
         return WechatApi.handle(resBase);
     }
 
-//    @RequestMapping(value = "/check/signature", method = RequestMethod.POST, produces = {"application/xml; charset=UTF-8"})
-//    public void wechatEvent(HttpServletRequest request, HttpServletResponse response) {
-//        try {
-//            // 为了防止消息乱码
-//            request.setCharacterEncoding("UTF-8");
-//            response.setCharacterEncoding("UTF-8");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        WechatApi.handle(request, response);
-//    }
+    @GetMapping(value = "/api")
+    public String api2(String signature,String timestamp,String nonce,String echostr){
+        String token = "xibeihouse";
+        String s = EncUtils.sortAndEncrypt(token, timestamp, nonce);
+        if (s.equals(signature)){
+            return echostr;
+        }
+        return "失败";
+    }
 
 }
