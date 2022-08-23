@@ -12,7 +12,7 @@ import java.util.Calendar;
 public class JiNianRiUtils {
 
     public static int getLianAi(){
-        return calculationLianAi("2022-01-17");
+        return calculationLianAi("2022-01-14");
     }
     public static int getBirthday_xueyan(){
         try {
