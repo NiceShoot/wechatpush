@@ -19,9 +19,9 @@ public class WechatApplication {
      * 每天9点推送
      */
     @Scheduled(cron = "0 0 9 * * ? ")
-    @Scheduled(cron = "0 0/1 * * * ?")
+    //@Scheduled(cron = "0 0/1 * * * ?") // 每分钟一次
     public void goodMorning(){
-        Pusher.push();
+        Pusher.push("");
     }
 
 }

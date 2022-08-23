@@ -11,6 +11,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
@@ -21,10 +22,15 @@ import java.util.Map;
 public class Pusher {
 
     public static void main(String[] args) {
-        push();
+        push(null);
     }
 
-    public static void push(){
+    public static void push(String userId){
+
+        String relUserId = "oqFra6TIEjhgDa65lENKckMPXj3o";// 雪燕
+        if (StringUtils.isNotBlank(userId)){
+            relUserId = userId;
+        }
         //1，配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
         wxStorage.setAppId(CommonConstant.APPID_TEST);
@@ -33,8 +39,7 @@ public class Pusher {
         wxMpService.setWxMpConfigStorage(wxStorage);
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("oqFra6ZIV5nsNxLbb3yDp1idu1Fg")// 贾冰
-                //.toUser("oqFra6TIEjhgDa65lENKckMPXj3o")// 雪燕
+                .toUser(relUserId)
                 .templateId("S1kPMXlTnwb2PAS8xNq2Dsw1k7fMhynlTXipcaaoycU")
                 .build();
         //3,如果是正式版发送模版消息，这里需要配置你的信息
@@ -55,7 +60,7 @@ public class Pusher {
         templateMessage.addData(new WxMpTemplateData("riqi",weather.getDate() + "  "+ weather.getWeek(),"#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("tianqi",weather.getText_now(),"#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("low",weather.getLow() + "","#00BFFF"));
-        templateMessage.addData(new WxMpTemplateData("temp",weather.getTemp() + "","#EE212D"));
+        templateMessage.addData(new WxMpTemplateData("temp",weather.getTemp() + "","#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("high",weather.getHigh()+ "","#00BFFF" ));
         templateMessage.addData(new WxMpTemplateData("windclass",weather.getWind_class()+ "","#00BFFF" ));
         templateMessage.addData(new WxMpTemplateData("winddir",weather.getWind_dir()+ "","#00BFFF" ));
@@ -63,7 +68,7 @@ public class Pusher {
         templateMessage.addData(new WxMpTemplateData("lianai", JiNianRiUtils.getLianAi()+"","#FF1493"));
         templateMessage.addData(new WxMpTemplateData("en",map.get("en") +"","#C71585"));
         templateMessage.addData(new WxMpTemplateData("zh",map.get("zh") +"","#C71585"));
-        String beizhu = "—— 西贝冰";
+        String beizhu = "";
         if(JiNianRiUtils.getLianAi() % 365 == 0){
             beizhu = "今天是恋爱" + (JiNianRiUtils.getLianAi() / 365) + "周年纪念日！";
         }

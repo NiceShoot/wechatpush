@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class ApiController {
 
 
-    @PostMapping(value = "/push")
-    public String push(){
-        Pusher.push();
+    @GetMapping(value = "/push")
+    public String push(String userId){
+        Pusher.push(userId);
         return "success";
     }
 
