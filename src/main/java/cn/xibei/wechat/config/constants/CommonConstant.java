@@ -3,6 +3,9 @@ package cn.xibei.wechat.config.constants;
 public class CommonConstant {
 
 
+    public static String XUE_YAN = "oqFra6TIEjhgDa65lENKckMPXj3o";
+    public static String JIA_BING = "oqFra6ZIV5nsNxLbb3yDp1idu1Fg";
+
     public static String APPID_TEST = "wxc973fa7934217c0b";
     public static String SECRET_TEST = "b1c5564268e0706703e00e1d859b5f12";
 

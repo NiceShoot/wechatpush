@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class ApiController {
 
+    @GetMapping(value = "/pushBirthday")
+    public String pushBirthday(String userId){
+        Pusher.pushBirthday(userId);
+        return "success";
+    }
 
     @GetMapping(value = "/push")
     public String push(String userId){
