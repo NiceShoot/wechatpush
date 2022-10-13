@@ -35,7 +35,7 @@ public class BirthdayUtils {
             Date birthdayDate = chineseDate.getGregorianDate();
             if (nowTime <= birthdayDate.getTime()){
                 long dayNum = DateUtil.betweenDay( new Date(),birthdayDate, true);
-                int day = t.getName().equals(BirthdayEnum.zhang_xue_yan.getName()) ? 100 : 3;
+                int day = t.getName().equals(BirthdayEnum.zhang_xue_yan.getName()) ? 100 : 30;
                 if (dayNum >=0 && dayNum <= day) {
                     Map<String,Object> map = new HashMap<>();
                     map.put("days",(int)dayNum);
