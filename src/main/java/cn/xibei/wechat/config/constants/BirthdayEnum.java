@@ -14,6 +14,8 @@ public enum BirthdayEnum {
     hao_shao_chen(4,20,"四月二十","大辰"),
     hao_xi_nuo(2,25,"二月二十五","大诺"),
     han_shi_jie(3,19,"三月十九","仕杰"),
+    lao_lao(9,9,"九月初九","姥姥"),
+    lao_ye(8,25,"八月二十五","姥爷"),
 
     ;
 
